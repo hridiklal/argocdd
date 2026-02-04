@@ -1,33 +1,21 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: myapp-deployment
+  name: nginx-deployment
   labels:
-    app: myapp
+    app: nginx
 spec:
-  replicas: 3
+  replicas: 2   # Number of pods
   selector:
     matchLabels:
-      app: myapp
+      app: nginx
   template:
     metadata:
       labels:
-        app: myapp
+        app: nginx
     spec:
       containers:
-      - name: myapp-container
-        image: httpd:2.4
+      - name: nginx
+        image: nginx:latest
         ports:
         - containerPort: 80
-        env:
-        - name: ENVIRONMENT
-          value: "production"
-        - name: APP_VERSION
-          value: "v1"
-        resources:
-          requests:
-            memory: "128Mi"
-            cpu: "250m"
-          limits:
-            memory: "256Mi"
-            cpu: "500m"
